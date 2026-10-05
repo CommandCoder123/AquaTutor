@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="radarChart" style="display: block; width: 275px; height: 137px;" width="275" height="137" class="chartjs-render-monitor"></canvas>
+
+<script type="text/javascript">
+  function colorCalculator(distance, alpha) {
+    var distance = distance * 2.55;
+    var result = "rgba(" + String(255-parseInt(distance/10)) + ",0," + String(0+parseInt(distance/10)) + "," + String(alpha) + ")";
+    return result;
+  }
+
+  function drawChart(data) {
+  	var config = {
+      type: 'radar',
+      data: {
+    		labels: ["Free", "Back", "Breast", "Fly", "IM"],
+    		datasets: [{
+    			data: [
+            data['1'],
+            data['2'],
+            data['3'],
+            data['4'],
+            data['5'],
+          ],
+    		}],
+      },
+      options: {
+        aspectRatio: 2,
+        legend: {
+          display: false,
+        },
+        tooltips: {
+          enabled: false,
+        },
+        elements: {
+          point: {
+            radius: 0,
+            hoverRadius: 0,
+          },
+          line: {
+            backgroundColor: colorCalculator(data['d'], 1),
+            borderColor: colorCalculator(data['d'], 1),
+            borderWidth: 1,
+            tension: 0,
+          }
+        },
+        scale: {
+          angleLines: {
+            color: '#eee',
+          },
+          gridLines: {
+            color: '#eee',
+            display: true,
+          },
+          ticks: {
+            display: false,
+            min: -100,
+            suggestedMax: 1000,
+            stepSize: 200,
+          },
+          pointLabels: {
+            fontFamily: '"Roboto", "Helvetica", "Arial", "sans-serif"',
+            fontSize: '16',
+            fontColor: 'rgba(0, 0, 0, .87)',
+          },
+        },
+      },
+  	};
+
+    var ctx2 = document.getElementById("radarChart").getContext("2d");
+  	var chart = new Chart(ctx2, config);
+    // generate gradient
+    var c = document.getElementById("gradient");
+    var w = document.getElementById("radarChart").width;
+    var ctx = c.getContext("2d");
+    var gradient = ctx.createLinearGradient(0, 0, w, 0);
+    gradient.addColorStop(0, "red");
+    gradient.addColorStop(1, "blue");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, w, 5);
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    var data = {"1": 256.0, "2": 172.33333333333334, "3": 170.5, "4": 249.66666666666669, "d": 224.65314834578442};
+
+    //replace undefined with 0
+    var strokes = ['1', '2', '3', '4', '5'];
+    for (var i = 0; i < strokes.length; i++) {
+      if (data[strokes[i]] == undefined) {
+        data[strokes[i]] = 0;
+      }
+    }
+    drawChart(data);
+  });
+</script>
+
+</body>
+</html>

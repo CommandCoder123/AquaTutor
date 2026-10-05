@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaTutor—SignUp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-color: rgb(0, 0, 0);
+            font-family: Verdana, Tahoma, sans-serif;
+            padding: 0%;
+            margin: 0;
+            width: 100vw;
+            height: auto;
+            overflow-x: hidden;
+        }
+
+        .header {
+            overflow: hidden;
+            padding: 20px 100px 0px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
+
+        .logo {
+            max-height: 80px;
+        }
+
+        .underline {
+            display: inline-block;
+            position: relative;
+            margin: 10px 30px;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        .underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #919191;
+            transition: transform 0.25s ease-out;
+        }
+
+        .underline:hover {
+            color: rgb(211, 211, 211);
+        }
+
+        .underline:hover::after {
+            transform: scaleX(1);
+        }
+
+        .active::after {
+            transform: scaleX(1);
+        }
+
+        .left .underline::after {
+            transform-origin: bottom left;
+        }
+
+        .left .underline:hover::after {
+            transform-origin: bottom left;
+        }
+
+        .underline::after {
+            transform-origin: bottom center;
+        }
+
+        .underline:hover::after {
+            transform-origin: bottom center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 11px 30px;
+
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            line-height: 24px;
+
+            text-decoration: none;
+
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+
+            background: linear-gradient(135deg,
+                    #37c8ff 0%,
+                    #318cff 45%,
+                    #7557ff 100%);
+
+            box-shadow:
+                0 6px 20px rgba(50, 145, 255, 0.25),
+                0 0 25px rgba(100, 75, 255, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.25);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                filter 0.2s ease;
+        }
+
+        .btn:hover {
+            color: white;
+            text-decoration: none;
+
+            transform: translateY(-2px);
+
+            filter: brightness(1.1);
+
+            box-shadow:
+                0 10px 30px rgba(50, 145, 255, 0.35),
+                0 0 35px rgba(105, 75, 255, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0) scale(0.98);
+
+            box-shadow:
+                0 4px 15px rgba(50, 145, 255, 0.25);
+        }
+
+        .panel-wrapper {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 50%;
+            margin: 100px 0%;
+
+        }
+
+        .panel-glow {
+            position: absolute;
+
+            width: 200%;
+            max-width: 2000px;
+            height: 1500px;
+
+            left: 50%;
+            top: 45%;
+
+            transform: translate(-50%, -50%);
+
+            background:
+                radial-gradient(ellipse at center,
+                    rgba(40, 175, 255, 0.32) 0%,
+                    rgba(45, 112, 255, 0.18) 30%,
+                    rgba(65, 116, 255, 0.1) 50%,
+                    transparent 75%);
+
+            filter: blur(35px);
+
+            pointer-events: none;
+        }
+
+        .panel {
+            width: 67%;
+            height: auto;
+            max-width: 1200px;
+            position: relative;
+
+            display: flex;
+            justify-content: center;
+            overflow-y: hidden;
+            padding: 4%;
+            padding-top: 40px;
+            padding-bottom: 150px;
+
+            border-radius: 28px;
+            border: 2px solid transparent;
+
+            background:
+                linear-gradient(#05070b, #05070b) padding-box,
+                linear-gradient(120deg,
+                    #6fd4ff 0%,
+                    #268cff 38%,
+                    #6558ff 70%,
+                    #a855ff 100%) border-box;
+
+            box-shadow:
+                0 35px 80px rgba(0, 0, 0, 0.9),
+
+                0 10px 35px rgba(35, 145, 255, 0.22),
+
+                -15px 20px 45px rgba(40, 190, 255, 0.13),
+
+                18px 8px 45px rgba(120, 70, 255, 0.12);
+
+        }
+
+        .flex {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .line-left {
+            margin: 10px;
+            background: linear-gradient(90deg, #3fc6fc, #6a5ffd, #695ffd2f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            /* or -webkit-text-fill-color: transparent */
+            font-size: 1vw;
+        }
+
+        .line-right {
+            margin: 10px;
+            background: linear-gradient(-90deg, #3fc6fc, #6a5ffd, #695ffd2f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            /* or -webkit-text-fill-color: transparent */
+            font-size: 1vw;
+        }
+
+        h1 {
+            color: White;
+            font-size: 7vw;
+        }
+
+        h1 strong {
+            background: linear-gradient(135deg, #3fc6fc, #6a5ffd);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            /* or -webkit-text-fill-color: transparent */
+        }
+
+        p {
+            color: rgb(180, 180, 180);
+            font-size: 1.2vw;
+            margin: 30px 100px;
+        }
+
+        .container {
+            flex-direction: column;
+        }
+
+        label {
+            width: 100%;
+            margin: 12px 0 6px;
+
+            color: #a5a5a5;
+            font-size: 14px;
+            font-weight: 500;
+
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="name"],
+        input[type="email"] {
+            width: 100%;
+            height: 56px;
+
+            padding: 0 18px;
+            margin: 0 0 14px;
+
+            box-sizing: border-box;
+
+            color: white;
+            font-size: 15px;
+
+            background: rgba(255, 255, 255, 0.04);
+
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+
+            outline: none;
+
+            transition:
+                border-color 0.2s ease,
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        input[type="text"]::placeholder,
+        input[type="password"]::placeholder,
+        input[type="name"]::placeholder,
+        input[type="email"]::placeholder {
+            color: #666;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="name"]:focus,
+        input[type="email"]:focus {
+            background: rgba(255, 255, 255, 0.06);
+
+            border-color: #3fc6fc;
+
+            box-shadow:
+                0 0 0 3px rgba(63, 198, 252, 0.08),
+                0 0 20px rgba(63, 198, 252, 0.08);
+
+            outline: none;
+        }
+
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus {
+            -webkit-text-fill-color: white;
+
+            -webkit-box-shadow:
+                0 0 0 1000px #101116 inset;
+
+            transition:
+                background-color 9999s ease-in-out 0s;
+        }
+
+        .remember-row {
+            width: fit-content;
+
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            margin: 10px 0 25px;
+
+            color: #969696;
+
+            font-size: 13px;
+
+            cursor: pointer;
+
+            user-select: none;
+            width: 98%;
+        }
+
+        .remember-row input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+
+            width: 18px;
+            height: 18px;
+
+            flex-shrink: 0;
+
+            margin: 0;
+
+            border-radius: 5px;
+
+            border: 1px solid rgba(255, 255, 255, 0.20);
+
+            background: rgba(255, 255, 255, 0.05);
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .remember-row input[type="checkbox"]:checked {
+            border-color: transparent;
+
+            background:
+                linear-gradient(135deg,
+                    #3fc6fc,
+                    #6a5ffd);
+
+            box-shadow:
+                0 0 14px rgba(63, 198, 252, 0.22);
+        }
+
+        .remember-row input[type="checkbox"]:checked::after {
+            content: "✓";
+
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .foot {
+            background-color: #161616;
+            height: 300px;
+            border-top: solid #2e2e2e;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100px;
+            gap: 30px;
+        }
+
+        #signup-error {
+            min-height: 18px;
+            margin: 5px 0 12px;
+
+            color: #ff6464;
+
+            font-size: 13px;
+            text-align: left;
+        }
+
+        .signupbtn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <a href="index.html"><img src="Assets/Logo.png" alt="Aqua Tutor" class="logo"></a>
+        <div class="header-right">
+            <a href="login.html" class="underline">Login</a>
+        </div>
+    </div>
+
+    <div class="panel-wrapper">
+
+        <div class="panel-glow"></div>
+        <div class="panel">
+            <form id="signup-form">
+                <div class="container flex">
+                    <div class="flex" style="height: 300px;">
+                        <p class="line-left"><s>ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</s></p>
+                        <h1 style="text-align: center; margin-top: 0px; margin-bottom: 0px; font-size: 4vw;">
+                            Sign<strong>Up</strong></h1>
+                        <p class="line-right"><s>ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</s></p>
+                    </div>
+
+                    <label for="email"><b>Email</b></label>
+                    <input class="fillout" id="email" type="email" placeholder="Enter Email" name="email" required>
+
+                    <label for="psw"><b>Password</b></label>
+                    <input class="fillout" id="psw" type="password" placeholder="Enter Password" name="psw"
+                        minlength="6" required>
+
+                    <label for="psw-repeat"><b>Repeat Password</b></label>
+                    <input class="fillout" id="psw-repeat" type="password" placeholder="Repeat Password"
+                        name="psw-repeat" minlength="6" required>
+
+                    <label for="name"><b>Name of Swimmer</b></label>
+                    <input class="fillout" id="name" type="text" placeholder="First Name + Last Name" name="name"
+                        required>
+
+                    <label class="remember-row">
+                        <input id="remember" type="checkbox" checked name="remember">
+                        <span>Remember me</span>
+                    </label>
+
+                    <p id="signup-error"></p>
+
+                    <div class="clearfix">
+
+                        <button type="button" class="cancelbtn underline" onclick="window.location.href='index.html'">
+                            Cancel
+                        </button>
+
+                        <button type="submit" class="signupbtn btn" id="signup-button">
+                            Sign Up
+                        </button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="foot">
+            <a href="index.html"><img src="Assets/Logo.png" alt="Aqua Tutor" class="logo"></a>
+            <div class="footer-buttons">
+                <a href="login.html" class="underline">Login</a>
+                <a href="signup.html" class="btn">Register ➜</a>
+            </div>
+            <p class="footer-copyright">© <span id="copyright-year"></span> AquaTutor. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="signup.js"></script>
+
+    <script>
+        // Get current year
+        const currentYear = new Date().getFullYear();
+        // Insert into span
+        document.getElementById('copyright-year').textContent = currentYear;
+    </script>
+
+</body>
+
+</html>
